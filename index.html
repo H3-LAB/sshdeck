@@ -121,13 +121,16 @@
   .card h3 { margin:0 0 6px; font-size:17px; letter-spacing:-.01em; } .card p { margin:0; color:var(--dim); font-size:15px; }
 
   .steps { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; counter-reset:s; }
-  .step { border:1px solid var(--line); border-radius:14px; padding:22px; background:var(--panel); }
+  /* same look and hover as the feature cards */
+  .step { border:1px solid var(--line); border-radius:14px; padding:22px; background:linear-gradient(180deg, var(--panel), var(--bg2)); transition:border-color .2s, transform .2s; }
+  .step:hover { border-color:#3a4052; transform:translateY(-2px); }
   .step::before { counter-increment:s; content:counter(s); display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%;
     background:linear-gradient(135deg, var(--pink), var(--violet)); color:#fff; font-weight:700; margin-bottom:12px; }
   .step h3 { margin:0 0 6px; font-size:17px; } .step p { margin:0; color:var(--dim); font-size:15px; }
 
   .faq { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  details { border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 18px; }
+  details { border:1px solid var(--line); border-radius:12px; background:linear-gradient(180deg, var(--panel), var(--bg2)); padding:16px 18px; transition:border-color .2s; }
+  details:hover, details[open] { border-color:#3a4052; }
   summary { cursor:pointer; font-weight:600; list-style:none; display:flex; justify-content:space-between; gap:12px; }
   summary::after { content:"+"; color:var(--faint); font-size:20px; line-height:1; }
   details[open] summary::after { content:"–"; }
@@ -143,7 +146,7 @@
   @media (max-width: 1000px) { .app { grid-template-columns:180px 1fr; } .ai { display:none; } }
   @media (max-width: 760px) { nav.links { display:none; } .grid, .steps, .faq { grid-template-columns:1fr; } .app { grid-template-columns:1fr; height:380px; } .side { display:none; }
     .panes { grid-template-columns:1fr; } .pane + .pane { display:none; } }
-  @media (prefers-reduced-motion: reduce) { .dots i { animation:none; } .card, .btn { transition:none; } }
+  @media (prefers-reduced-motion: reduce) { .dots i { animation:none; } .card, .step, .btn { transition:none; } .card:hover, .step:hover { transform:none; } }
 </style>
 </head>
 <body>
