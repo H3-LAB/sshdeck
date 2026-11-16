@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSH Deck — Privacy Policy</title>
+<style>
+  :root { --bg:#0f1115; --panel:#16181d; --text:#d4d7dd; --dim:#8b93a1; --accent:#388bfd; --line:#2a2e37; }
+  @media (prefers-color-scheme: light) { :root { --bg:#ffffff; --panel:#f6f7f9; --text:#1c1f24; --dim:#5c6370; --line:#e3e6ea; } }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.6 "Segoe UI", system-ui, sans-serif; }
+  main { max-width:820px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:28px; margin:0 0 4px; } h2 { font-size:19px; margin:28px 0 6px; } h3 { font-size:16px; margin:18px 0 4px; }
+  .meta { color:var(--dim); margin-bottom:24px; }
+  nav a { color:var(--accent); margin-right:14px; }
+  section { border-top:1px solid var(--line); margin-top:32px; padding-top:8px; }
+  li { margin:4px 0; } code { background:var(--panel); padding:1px 5px; border-radius:4px; }
+</style>
+</head>
+<body>
+<main>
+<h1>SSH Deck — Privacy Policy</h1>
+<div class="meta">Last updated: 16 November 2026 · <nav style="display:inline"><a href="#en">English</a><a href="#pt">Português</a></nav></div>
+
+<section id="en">
+<h2>Summary</h2>
+<p>SSH Deck is a desktop application that runs on your computer. It has <strong>no account, no telemetry, no analytics and no advertising</strong>. The developer does not receive any data about you or how you use the app. Data only leaves your computer when you connect to something yourself: your servers, your git repository, a package mirror, or an AI provider you configure.</p>
+
+<h2>Data stored on your computer</h2>
+<ul>
+  <li><strong>Settings, the list of hosts you added, tunnels and preferences</strong> — <code>%APPDATA%\SSH Deck</code>.</li>
+  <li><strong>The integrated Cygwin environment</strong> and its files — <code>%LOCALAPPDATA%\SSH Deck</code>.</li>
+  <li><strong>AI assistant conversations</strong> (optional, can be turned off and deleted in Settings) — encrypted with your Windows account (DPAPI).</li>
+  <li><strong>AI provider API keys</strong> — encrypted with your Windows account (DPAPI); never stored in clear text.</li>
+  <li>Your <strong>ssh config, keys and known_hosts</strong> stay in your own <code>~/.ssh</code> folder. SSH Deck reads the config; private keys are only handed to the Windows ssh-agent with the standard <code>ssh-add</code> tool, and are never sent anywhere.</li>
+</ul>
+
+<h2>Network connections the app makes</h2>
+<ul>
+  <li><strong>SSH, SFTP and tunnels</strong> to the hosts you choose, using OpenSSH and your own ssh configuration.</li>
+  <li><strong>Your git repository</strong>, if your ssh config folder is a git repository (fetch / pull / push you ask for).</li>
+  <li><strong>The Cygwin package mirror</strong>, only when you use the Cygwin package manager in Settings.</li>
+  <li><strong>The AI provider you configure</strong>, only when you send a question to the assistant (see below).</li>
+</ul>
+<p>Connections go through the proxy you configure in Settings, if any.</p>
+
+<h2>AI assistant</h2>
+<p>The assistant is optional. When you ask it something, SSH Deck sends to the provider you selected: your question, the recent output of the active terminal (if "Include terminal output" is on), the session type, its host alias and environment name, and earlier messages of that conversation. Before sending, the app masks text that looks like secrets (passwords, tokens, private keys, credentials in URLs); this can be configured in Settings.</p>
+<ul>
+  <li><strong>Ollama / local servers</strong> (e.g. LM Studio): the data stays on your computer or network.</li>
+  <li><strong>Cloud providers</strong> (Anthropic, OpenAI or other OpenAI-compatible services): the data is sent to that provider under your own API key and is subject to that provider's privacy policy and terms.</li>
+</ul>
+
+<h2>Children</h2>
+<p>SSH Deck is a tool for IT professionals and is not directed at children.</p>
+
+<h2>Changes and contact</h2>
+<p>Changes to this policy will be published on this page with a new date. Questions: <a href="mailto:[contact email]">[contact email]</a>.</p>
+</section>
+
+<section id="pt" lang="pt-PT">
+<h2>Resumo</h2>
+<p>O SSH Deck é uma aplicação que corre no teu computador. <strong>Não tem conta, telemetria, estatísticas de utilização nem publicidade.</strong> O programador não recebe nenhum dado sobre ti nem sobre o uso da app. Os dados só saem do teu computador quando tu te ligas a algo: aos teus servidores, ao teu repositório git, a um mirror de pacotes ou a um fornecedor de IA que configures.</p>
+
+<h2>Dados guardados no teu computador</h2>
+<ul>
+  <li><strong>Definições, lista de hosts que adicionaste, túneis e preferências</strong> — <code>%APPDATA%\SSH Deck</code>.</li>
+  <li><strong>O ambiente Cygwin integrado</strong> e os seus ficheiros — <code>%LOCALAPPDATA%\SSH Deck</code>.</li>
+  <li><strong>Conversas do assistente de IA</strong> (opcional; pode ser desligado e apagado nas Definições) — cifradas com a tua conta do Windows (DPAPI).</li>
+  <li><strong>Chaves de API dos fornecedores de IA</strong> — cifradas com a tua conta do Windows (DPAPI); nunca guardadas em texto simples.</li>
+  <li>O teu <strong>ssh config, chaves e known_hosts</strong> ficam na tua pasta <code>~/.ssh</code>. O SSH Deck lê o config; as chaves privadas só são entregues ao ssh-agent do Windows com a ferramenta padrão <code>ssh-add</code> e nunca são enviadas para lado nenhum.</li>
+</ul>
+
+<h2>Ligações de rede que a app faz</h2>
+<ul>
+  <li><strong>SSH, SFTP e túneis</strong> para os hosts que escolhes, com o OpenSSH e a tua configuração ssh.</li>
+  <li><strong>O teu repositório git</strong>, se a pasta do ssh config for um repositório (fetch / pull / push que pedires).</li>
+  <li><strong>O mirror de pacotes do Cygwin</strong>, só quando usas o gestor de pacotes nas Definições.</li>
+  <li><strong>O fornecedor de IA que configurares</strong>, só quando envias uma pergunta ao assistente (ver abaixo).</li>
+</ul>
+<p>As ligações passam pelo proxy que configures nas Definições, se houver.</p>
+
+<h2>Assistente de IA</h2>
+<p>O assistente é opcional. Quando lhe perguntas algo, o SSH Deck envia ao fornecedor escolhido: a pergunta, a saída recente do terminal ativo (se "Incluir a saída do terminal" estiver ligado), o tipo de sessão, o alias do host e o nome do ambiente, e as mensagens anteriores dessa conversa. Antes de enviar, a app oculta texto que pareça segredo (passwords, tokens, chaves privadas, credenciais em URLs); isto é configurável nas Definições.</p>
+<ul>
+  <li><strong>Ollama / servidores locais</strong> (p.ex. LM Studio): os dados ficam no teu computador ou na tua rede.</li>
+  <li><strong>Fornecedores na cloud</strong> (Anthropic, OpenAI ou outros compatíveis com OpenAI): os dados são enviados a esse fornecedor com a tua chave de API e ficam sujeitos à política de privacidade e aos termos desse fornecedor.</li>
+</ul>
+
+<h2>Crianças</h2>
+<p>O SSH Deck é uma ferramenta para profissionais de TI e não se destina a crianças.</p>
+
+<h2>Alterações e contacto</h2>
+<p>As alterações a esta política são publicadas nesta página com nova data. Dúvidas: <a href="mailto:[contact email]">[contact email]</a>.</p>
+</section>
+</main>
+</body>
+</html>

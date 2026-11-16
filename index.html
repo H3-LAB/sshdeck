@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSH Deck — your servers, organised</title>
+<meta name="description" content="SSH, SFTP, tunnels and an AI assistant in one place, organised by your own ssh config. For Windows.">
+<link rel="icon" href="assets/logo.png">
+<meta property="og:title" content="SSH Deck">
+<meta property="og:description" content="Your servers, organised: SSH, SFTP, tunnels and AI in one place. For Windows.">
+<meta property="og:image" content="assets/logo.png">
+<style>
+  :root {
+    --bg:#0f1115; --panel:#16181d; --panel2:#1c1f26; --line:#2a2e37; --text:#e6e8ec; --dim:#9aa2b1; --faint:#6b7280;
+    --accent:#d6409f; --accent2:#6e56cf; --ok:#3fb950;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) { --bg:#fbfbfd; --panel:#ffffff; --panel2:#f3f4f7; --line:#e3e6ea; --text:#15171c; --dim:#4b5262; --faint:#7a8191; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 "Segoe UI", system-ui, -apple-system, sans-serif; }
+  a { color:inherit; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 16px; }
+  header.top { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:600; text-decoration:none; }
+  .brand img { width:30px; height:30px; }
+  select { background:var(--panel2); color:var(--text); border:1px solid var(--line); border-radius:8px; padding:6px 10px; font:inherit; font-size:14px; }
+
+  .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap:40px; align-items:center; padding:56px 0 40px; }
+  .hero h1 { font-size:clamp(34px, 5vw, 56px); line-height:1.08; margin:0 0 16px; letter-spacing:-.02em; }
+  .hero h1 .grad { background:linear-gradient(90deg, var(--accent), var(--accent2) 55%, #3fa7f5); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p.lead { color:var(--dim); font-size:19px; margin:0 0 28px; max-width:560px; }
+  .cta { display:flex; flex-wrap:wrap; align-items:center; gap:14px; }
+  .store img { height:56px; display:block; }
+  .store.soon { display:inline-flex; align-items:center; gap:10px; height:56px; padding:0 18px; border-radius:10px; border:1px dashed var(--line); color:var(--dim); text-decoration:none; }
+  .btn2 { display:inline-flex; align-items:center; height:44px; padding:0 18px; border-radius:10px; background:var(--panel2); border:1px solid var(--line); text-decoration:none; font-weight:600; }
+  .reqs { color:var(--faint); font-size:13px; margin-top:16px; }
+  .logo-big { justify-self:center; width:min(300px, 70vw); filter:drop-shadow(0 30px 60px rgba(214,64,159,.25)); }
+
+  .term { margin:8px 0 56px; border:1px solid var(--line); border-radius:12px; background:#0c0d10; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  .term .bar { display:flex; gap:8px; align-items:center; padding:10px 14px; background:#16181d; border-bottom:1px solid #2a2e37; font-size:13px; color:#9aa2b1; }
+  .dot { width:11px; height:11px; border-radius:50%; } .tab { padding:3px 10px; border-radius:6px; background:#1f2229; color:#d4d7dd; }
+  .badge { font-size:10px; font-weight:700; color:#fff; padding:1px 5px; border-radius:4px; margin-right:6px; }
+  pre { margin:0; padding:18px 20px; color:#d4d7dd; font:13.5px/1.55 "Cascadia Mono", Consolas, monospace; overflow-x:auto; }
+  .c1{color:#f472b6} .c2{color:#c084fc} .c3{color:#818cf8} .c4{color:#60a5fa} .c5{color:#38bdf8} .c6{color:#22d3ee} .g{color:#4ade80} .d{color:#6b7280} .y{color:#fbbf24}
+
+  h2 { font-size:28px; margin:0 0 8px; letter-spacing:-.01em; }
+  .sub { color:var(--dim); margin:0 0 28px; }
+  .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:64px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .card .ic { width:36px; height:36px; border-radius:9px; display:grid; place-items:center; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; font-size:18px; margin-bottom:12px; }
+  .card h3 { margin:0 0 6px; font-size:17px; } .card p { margin:0; color:var(--dim); font-size:15px; }
+
+  .privacy { display:flex; gap:16px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px; margin-bottom:64px; }
+  .privacy .ic { font-size:28px; }
+  footer { border-top:1px solid var(--line); padding:24px 0 40px; color:var(--faint); font-size:14px; display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; }
+  footer a { color:var(--dim); margin-left:16px; }
+
+  @media (max-width: 860px) { .hero { grid-template-columns:1fr; padding-top:24px; } .logo-big { display:none; } .grid { grid-template-columns:1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns:1fr; } .privacy { flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><img src="assets/logo.png" alt=""> SSH Deck</a>
+    <select id="lang" aria-label="Language">
+      <option value="en">English</option><option value="pt">Português (Portugal)</option><option value="pt-BR">Português (Brasil)</option>
+      <option value="es">Español</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option>
+    </select>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1 data-i="h1a">Your servers,</h1>
+      <h1 style="margin-top:-10px"><span class="grad" data-i="h1b">organised.</span></h1>
+      <p class="lead" data-i="lead">SSH, SFTP, tunnels and an AI assistant in one place — with tabs, split panes and broadcast, grouped by your own ssh config.</p>
+      <div class="cta">
+        <a id="store" class="store" href="#" target="_blank" rel="noopener"></a>
+        <a class="btn2" href="#features" data-i="more">See what it does</a>
+      </div>
+      <div class="reqs" data-i="reqs">Windows 10 (1809) or Windows 11 · x64 · no admin rights needed</div>
+    </div>
+    <img class="logo-big" src="assets/logo.png" alt="SSH Deck">
+  </section>
+
+  <div class="term" aria-hidden="true">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span>
+      <span class="tab"><span class="badge" style="background:#2ea043">CYG</span>SSH Deck (Cygwin)</span>
+      <span class="tab"><span class="badge" style="background:#388bfd">SSH</span>web01.demo</span>
+    </div>
+<pre><span class="c1">  ███████╗███████╗██╗  ██╗    ██████╗ ███████╗ ██████╗██╗  ██╗</span>
+<span class="c2">  ██╔════╝██╔════╝██║  ██║    ██╔══██╗██╔════╝██╔════╝██║ ██╔╝</span>
+<span class="c3">  ███████╗███████╗███████║    ██║  ██║█████╗  ██║     █████╔╝ </span>
+<span class="c4">  ╚════██║╚════██║██╔══██║    ██║  ██║██╔══╝  ██║     ██╔═██╗ </span>
+<span class="c5">  ███████║███████║██║  ██║    ██████╔╝███████╗╚██████╗██║  ██╗</span>
+<span class="c6">  ╚══════╝╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝</span>
+  <span class="d">──────────────────────────────────────────────────────────────</span>
+   <span class="g">◆</span> <span class="d">agent  </span> <b>7</b> <span data-i="tk">keys ready in the SSH Deck Agent</span>
+   <span class="c4">◆</span> <span class="d">hosts  </span> <b>42</b> <span data-i="th">hosts in your ssh config (with config.d)</span>
+   <span class="c3">◆</span> <span class="d">engine </span> Cygwin 3.6 · OpenSSH 10.6 · bash 5.2
+  <span class="d">──────────────────────────────────────────────────────────────</span>
+
+<span class="c3">╭─</span> <span class="c1">admin</span><span class="d">@</span><span class="c2">workstation</span> <span class="c5">~</span>
+<span class="c3">╰─</span><span class="c5">❯</span> ssh web01.demo
+<span class="y">admin@web01.demo:~$</span> sudo systemctl status nginx --no-pager | head -3</pre>
+  </div>
+
+  <section id="features">
+    <h2 data-i="fh">Everything for your servers, in one window</h2>
+    <p class="sub" data-i="fs">Built for system administrators and DevOps teams who live in SSH.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">▦</div><h3 data-i="f1t">Hosts from your ssh config</h3><p data-i="f1d">Include, config.d and ProxyJump chains just work. Group, search and open in one click.</p></div>
+      <div class="card"><div class="ic">◫</div><h3 data-i="f2t">Tabs, splits, broadcast</h3><p data-i="f2d">Split panes, drag tabs to split, and type in many servers at once.</p></div>
+      <div class="card"><div class="ic">●</div><h3 data-i="f3t">Safe in production</h3><p data-i="f3d">Your own environments colour every tab, with confirmations before risky actions.</p></div>
+      <div class="card"><div class="ic">⇅</div><h3 data-i="f4t">SFTP file manager</h3><p data-i="f4d">Drag & drop uploads, downloads, and edit remote files with upload on save.</p></div>
+      <div class="card"><div class="ic">⇄</div><h3 data-i="f5t">One-click tunnels</h3><p data-i="f5d">Databases, RDP and SOCKS through your bastions.</p></div>
+      <div class="card"><div class="ic">⚿</div><h3 data-i="f6t">SSH Deck Agent</h3><p data-i="f6d">Your keys in one place, with per-key rules — shared by Windows, Cygwin and WSL.</p></div>
+      <div class="card"><div class="ic">$_</div><h3 data-i="f7t">Integrated Cygwin</h3><p data-i="f7d">bash, OpenSSH, rsync, tmux, vim, jq… ready to use, no admin, no WSL.</p></div>
+      <div class="card"><div class="ic">✦</div><h3 data-i="f8t">AI assistant</h3><p data-i="f8d">Explains errors and suggests commands. Local models or your own API key; secrets masked.</p></div>
+      <div class="card"><div class="ic">⌁</div><h3 data-i="f9t">Focus mode</h3><p data-i="f9d">Full screen, transparency and a global shortcut to bring it back.</p></div>
+    </div>
+  </section>
+
+  <div class="privacy">
+    <div class="ic">🔒</div>
+    <div><strong data-i="pt">No account. No telemetry. No ads.</strong><br><span style="color:var(--dim)" data-i="pd">Your data stays on your computer. Read the</span> <a href="privacy.html" data-i="pl">privacy policy</a>.</div>
+  </div>
+
+  <footer>
+    <span>© <span id="year"></span> Ricardo Gouveia · SSH Deck</span>
+    <span><a href="privacy.html" data-i="pl2">Privacy</a></span>
+  </footer>
+</div>
+
+<script>
+// Microsoft Store product ID (Partner Center → Product identity → Store ID). Empty = "coming soon".
+const STORE_ID = "";
+
+const T = {
+  en: { tk:"keys ready in the SSH Deck Agent", th:"hosts in your ssh config (with config.d)", h1a:"Your servers,", h1b:"organised.", lead:"SSH, SFTP, tunnels and an AI assistant in one place — with tabs, split panes and broadcast, grouped by your own ssh config.", more:"See what it does", reqs:"Windows 10 (1809) or Windows 11 · x64 · no admin rights needed", soon:"Coming soon to the Microsoft Store",
+        fh:"Everything for your servers, in one window", fs:"Built for system administrators and DevOps teams who live in SSH.",
+        f1t:"Hosts from your ssh config", f1d:"Include, config.d and ProxyJump chains just work. Group, search and open in one click.",
+        f2t:"Tabs, splits, broadcast", f2d:"Split panes, drag tabs to split, and type in many servers at once.",
+        f3t:"Safe in production", f3d:"Your own environments colour every tab, with confirmations before risky actions.",
+        f4t:"SFTP file manager", f4d:"Drag & drop uploads, downloads, and edit remote files with upload on save.",
+        f5t:"One-click tunnels", f5d:"Databases, RDP and SOCKS through your bastions.",
+        f6t:"SSH Deck Agent", f6d:"Your keys in one place, with per-key rules — shared by Windows, Cygwin and WSL.",
+        f7t:"Integrated Cygwin", f7d:"bash, OpenSSH, rsync, tmux, vim, jq… ready to use, no admin, no WSL.",
+        f8t:"AI assistant", f8d:"Explains errors and suggests commands. Local models or your own API key; secrets masked.",
+        f9t:"Focus mode", f9d:"Full screen, transparency and a global shortcut to bring it back.",
+        pt:"No account. No telemetry. No ads.", pd:"Your data stays on your computer. Read the", pl:"privacy policy", pl2:"Privacy" },
+  pt: { tk:"chaves prontas no SSH Deck Agent", th:"hosts no teu ssh config (com config.d)", h1a:"Os teus servidores,", h1b:"organizados.", lead:"SSH, SFTP, túneis e um assistente de IA num só sítio — com separadores, painéis divididos e broadcast, agrupados pelo teu próprio ssh config.", more:"Ver o que faz", reqs:"Windows 10 (1809) ou Windows 11 · x64 · sem direitos de administrador", soon:"Brevemente na Microsoft Store",
+        fh:"Tudo para os teus servidores, numa só janela", fs:"Feito para administradores de sistemas e equipas DevOps que vivem no SSH.",
+        f1t:"Hosts do teu ssh config", f1d:"Include, config.d e cadeias ProxyJump funcionam. Agrupa, pesquisa e abre com um clique.",
+        f2t:"Separadores, divisões, broadcast", f2d:"Painéis divididos, arrastar separadores para dividir e escrever em vários servidores ao mesmo tempo.",
+        f3t:"Seguro em produção", f3d:"Os teus ambientes dão cor a cada separador, com confirmações antes de ações arriscadas.",
+        f4t:"Gestor de ficheiros SFTP", f4d:"Envia arrastando, descarrega e edita ficheiros remotos com envio ao gravar.",
+        f5t:"Túneis com um clique", f5d:"Bases de dados, RDP e SOCKS através dos teus bastions.",
+        f6t:"SSH Deck Agent", f6d:"As tuas chaves num só sítio, com regras por chave — partilhado pelo Windows, Cygwin e WSL.",
+        f7t:"Cygwin integrado", f7d:"bash, OpenSSH, rsync, tmux, vim, jq… prontos a usar, sem admin e sem WSL.",
+        f8t:"Assistente de IA", f8d:"Explica erros e sugere comandos. Modelos locais ou a tua chave de API; segredos ocultados.",
+        f9t:"Modo foco", f9d:"Ecrã inteiro, transparência e um atalho global para o trazer de volta.",
+        pt:"Sem conta. Sem telemetria. Sem anúncios.", pd:"Os teus dados ficam no teu computador. Lê a", pl:"política de privacidade", pl2:"Privacidade" },
+  "pt-BR": { tk:"chaves prontas no SSH Deck Agent", th:"hosts no seu ssh config (com config.d)", h1a:"Seus servidores,", h1b:"organizados.", lead:"SSH, SFTP, túneis e um assistente de IA em um só lugar — com abas, painéis divididos e broadcast, agrupados pelo seu próprio ssh config.", more:"Ver o que faz", reqs:"Windows 10 (1809) ou Windows 11 · x64 · sem direitos de administrador", soon:"Em breve na Microsoft Store",
+        fh:"Tudo para os seus servidores, em uma só janela", fs:"Feito para administradores de sistemas e equipes DevOps que vivem no SSH.",
+        f1t:"Hosts do seu ssh config", f1d:"Include, config.d e cadeias ProxyJump funcionam. Agrupe, pesquise e abra com um clique.",
+        f2t:"Abas, divisões, broadcast", f2d:"Painéis divididos, arrastar abas para dividir e digitar em vários servidores ao mesmo tempo.",
+        f3t:"Seguro em produção", f3d:"Seus ambientes colorem cada aba, com confirmações antes de ações arriscadas.",
+        f4t:"Gerenciador de arquivos SFTP", f4d:"Envie arrastando, baixe e edite arquivos remotos com envio ao salvar.",
+        f5t:"Túneis com um clique", f5d:"Bancos de dados, RDP e SOCKS através dos seus bastions.",
+        f6t:"SSH Deck Agent", f6d:"Suas chaves em um só lugar, com regras por chave — compartilhado pelo Windows, Cygwin e WSL.",
+        f7t:"Cygwin integrado", f7d:"bash, OpenSSH, rsync, tmux, vim, jq… prontos para usar, sem admin e sem WSL.",
+        f8t:"Assistente de IA", f8d:"Explica erros e sugere comandos. Modelos locais ou sua chave de API; segredos ocultados.",
+        f9t:"Modo foco", f9d:"Tela cheia, transparência e um atalho global para trazê-lo de volta.",
+        pt:"Sem conta. Sem telemetria. Sem anúncios.", pd:"Seus dados ficam no seu computador. Leia a", pl:"política de privacidade", pl2:"Privacidade" },
+  es: { tk:"claves listas en el SSH Deck Agent", th:"hosts en tu ssh config (con config.d)", h1a:"Tus servidores,", h1b:"organizados.", lead:"SSH, SFTP, túneles y un asistente de IA en un solo lugar — con pestañas, paneles divididos y broadcast, agrupados según tu propio ssh config.", more:"Ver qué hace", reqs:"Windows 10 (1809) o Windows 11 · x64 · sin permisos de administrador", soon:"Próximamente en Microsoft Store",
+        fh:"Todo para tus servidores, en una sola ventana", fs:"Hecho para administradores de sistemas y equipos DevOps que viven en SSH.",
+        f1t:"Hosts de tu ssh config", f1d:"Include, config.d y cadenas ProxyJump funcionan. Agrupa, busca y abre con un clic.",
+        f2t:"Pestañas, divisiones, broadcast", f2d:"Paneles divididos, arrastrar pestañas para dividir y escribir en muchos servidores a la vez.",
+        f3t:"Seguro en producción", f3d:"Tus entornos colorean cada pestaña, con confirmaciones antes de acciones arriesgadas.",
+        f4t:"Gestor de archivos SFTP", f4d:"Sube arrastrando, descarga y edita archivos remotos con subida al guardar.",
+        f5t:"Túneles con un clic", f5d:"Bases de datos, RDP y SOCKS a través de tus bastiones.",
+        f6t:"SSH Deck Agent", f6d:"Tus claves en un solo lugar, con reglas por clave — compartido por Windows, Cygwin y WSL.",
+        f7t:"Cygwin integrado", f7d:"bash, OpenSSH, rsync, tmux, vim, jq… listos para usar, sin admin ni WSL.",
+        f8t:"Asistente de IA", f8d:"Explica errores y sugiere comandos. Modelos locales o tu clave de API; secretos ocultos.",
+        f9t:"Modo foco", f9d:"Pantalla completa, transparencia y un atajo global para recuperarlo.",
+        pt:"Sin cuenta. Sin telemetría. Sin anuncios.", pd:"Tus datos se quedan en tu ordenador. Lee la", pl:"política de privacidad", pl2:"Privacidad" },
+  fr: { tk:"clés prêtes dans le SSH Deck Agent", th:"hôtes dans votre ssh config (avec config.d)", h1a:"Vos serveurs,", h1b:"organisés.", lead:"SSH, SFTP, tunnels et un assistant IA au même endroit — avec onglets, panneaux divisés et broadcast, regroupés selon votre propre ssh config.", more:"Voir ce qu'il fait", reqs:"Windows 10 (1809) ou Windows 11 · x64 · sans droits d'administrateur", soon:"Bientôt sur le Microsoft Store",
+        fh:"Tout pour vos serveurs, dans une seule fenêtre", fs:"Conçu pour les administrateurs système et les équipes DevOps qui vivent dans SSH.",
+        f1t:"Hôtes de votre ssh config", f1d:"Include, config.d et chaînes ProxyJump fonctionnent. Regroupez, cherchez et ouvrez d'un clic.",
+        f2t:"Onglets, divisions, broadcast", f2d:"Panneaux divisés, glisser un onglet pour diviser, taper dans plusieurs serveurs à la fois.",
+        f3t:"Sûr en production", f3d:"Vos environnements colorent chaque onglet, avec confirmation avant les actions risquées.",
+        f4t:"Gestionnaire de fichiers SFTP", f4d:"Envoi par glisser-déposer, téléchargement et modification de fichiers distants avec envoi à l'enregistrement.",
+        f5t:"Tunnels en un clic", f5d:"Bases de données, RDP et SOCKS via vos bastions.",
+        f6t:"SSH Deck Agent", f6d:"Vos clés au même endroit, avec des règles par clé — partagé par Windows, Cygwin et WSL.",
+        f7t:"Cygwin intégré", f7d:"bash, OpenSSH, rsync, tmux, vim, jq… prêts à l'emploi, sans admin ni WSL.",
+        f8t:"Assistant IA", f8d:"Explique les erreurs et suggère des commandes. Modèles locaux ou votre clé d'API ; secrets masqués.",
+        f9t:"Mode focus", f9d:"Plein écran, transparence et un raccourci global pour le rappeler.",
+        pt:"Sans compte. Sans télémétrie. Sans publicité.", pd:"Vos données restent sur votre ordinateur. Lisez la", pl:"politique de confidentialité", pl2:"Confidentialité" },
+  de: { tk:"Schlüssel bereit im SSH Deck Agent", th:"Hosts in deiner ssh config (mit config.d)", h1a:"Deine Server,", h1b:"geordnet.", lead:"SSH, SFTP, Tunnel und ein KI-Assistent an einem Ort — mit Tabs, geteilten Bereichen und Broadcast, gruppiert nach deiner eigenen ssh config.", more:"Funktionen ansehen", reqs:"Windows 10 (1809) oder Windows 11 · x64 · keine Adminrechte nötig", soon:"Bald im Microsoft Store",
+        fh:"Alles für deine Server, in einem Fenster", fs:"Für Systemadministratoren und DevOps-Teams, die in SSH leben.",
+        f1t:"Hosts aus deiner ssh config", f1d:"Include, config.d und ProxyJump-Ketten funktionieren. Gruppieren, suchen und mit einem Klick öffnen.",
+        f2t:"Tabs, Teilung, Broadcast", f2d:"Geteilte Bereiche, Tabs zum Teilen ziehen und auf vielen Servern gleichzeitig tippen.",
+        f3t:"Sicher in Produktion", f3d:"Deine Umgebungen färben jeden Tab, mit Rückfrage vor riskanten Aktionen.",
+        f4t:"SFTP-Dateimanager", f4d:"Hochladen per Drag & Drop, Herunterladen und Bearbeiten entfernter Dateien mit Hochladen beim Speichern.",
+        f5t:"Tunnel mit einem Klick", f5d:"Datenbanken, RDP und SOCKS über deine Bastion-Hosts.",
+        f6t:"SSH Deck Agent", f6d:"Deine Schlüssel an einem Ort, mit Regeln pro Schlüssel — geteilt von Windows, Cygwin und WSL.",
+        f7t:"Integriertes Cygwin", f7d:"bash, OpenSSH, rsync, tmux, vim, jq … sofort nutzbar, ohne Admin und ohne WSL.",
+        f8t:"KI-Assistent", f8d:"Erklärt Fehler und schlägt Befehle vor. Lokale Modelle oder eigener API-Schlüssel; Geheimnisse ausgeblendet.",
+        f9t:"Fokusmodus", f9d:"Vollbild, Transparenz und ein globales Tastenkürzel zum Zurückholen.",
+        pt:"Kein Konto. Keine Telemetrie. Keine Werbung.", pd:"Deine Daten bleiben auf deinem Computer. Lies die", pl:"Datenschutzerklärung", pl2:"Datenschutz" },
+  it: { tk:"chiavi pronte nel SSH Deck Agent", th:"host nel tuo ssh config (con config.d)", h1a:"I tuoi server,", h1b:"organizzati.", lead:"SSH, SFTP, tunnel e un assistente IA in un unico posto — con schede, pannelli divisi e broadcast, raggruppati secondo il tuo ssh config.", more:"Scopri cosa fa", reqs:"Windows 10 (1809) o Windows 11 · x64 · nessun diritto di amministratore", soon:"Presto sul Microsoft Store",
+        fh:"Tutto per i tuoi server, in un'unica finestra", fs:"Pensato per amministratori di sistema e team DevOps che vivono in SSH.",
+        f1t:"Host dal tuo ssh config", f1d:"Include, config.d e catene ProxyJump funzionano. Raggruppa, cerca e apri con un clic.",
+        f2t:"Schede, divisioni, broadcast", f2d:"Pannelli divisi, trascina le schede per dividere e scrivi su più server insieme.",
+        f3t:"Sicuro in produzione", f3d:"I tuoi ambienti colorano ogni scheda, con conferme prima delle azioni rischiose.",
+        f4t:"File manager SFTP", f4d:"Caricamento con trascinamento, download e modifica di file remoti con caricamento al salvataggio.",
+        f5t:"Tunnel con un clic", f5d:"Database, RDP e SOCKS attraverso i tuoi bastion.",
+        f6t:"SSH Deck Agent", f6d:"Le tue chiavi in un unico posto, con regole per chiave — condiviso da Windows, Cygwin e WSL.",
+        f7t:"Cygwin integrato", f7d:"bash, OpenSSH, rsync, tmux, vim, jq… pronti all'uso, senza admin e senza WSL.",
+        f8t:"Assistente IA", f8d:"Spiega gli errori e suggerisce comandi. Modelli locali o la tua chiave API; segreti nascosti.",
+        f9t:"Modalità focus", f9d:"Schermo intero, trasparenza e una scorciatoia globale per richiamarlo.",
+        pt:"Nessun account. Nessuna telemetria. Nessuna pubblicità.", pd:"I tuoi dati restano sul tuo computer. Leggi l'", pl:"informativa sulla privacy", pl2:"Privacy" },
+};
+// Microsoft Store badge locale per language
+const BADGE = { en:"en-us", pt:"pt-pt", "pt-BR":"pt-br", es:"es-es", fr:"fr-fr", de:"de-de", it:"it-it" };
+
+function pick() {
+  try { const saved = localStorage.getItem("lang"); if (saved && T[saved]) return saved; } catch (e) {}
+  for (const l of navigator.languages || [navigator.language || "en"]) {
+    if (T[l]) return l;
+    if (l.toLowerCase() === "pt-br") return "pt-BR";
+    const base = l.split("-")[0]; if (T[base]) return base;
+  }
+  return "en";
+}
+
+function apply(lang) {
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el => { const k = el.dataset.i; if (t[k]) el.textContent = t[k]; });
+  document.getElementById("lang").value = lang;
+  const store = document.getElementById("store");
+  if (STORE_ID) {
+    store.className = "store";
+    store.href = `https://apps.microsoft.com/detail/${STORE_ID}?mode=direct`;
+    store.innerHTML = `<img src="https://get.microsoft.com/images/${BADGE[lang]}%20dark.svg" alt="Get it from Microsoft" onerror="this.replaceWith(document.createTextNode('Microsoft Store'))">`;
+  } else {
+    store.className = "store soon"; store.removeAttribute("href"); store.textContent = "🛍  " + t.soon;
+  }
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("lang").addEventListener("change", e => { try { localStorage.setItem("lang", e.target.value); } catch (x) {} apply(e.target.value); });
+apply(pick());
+</script>
+</body>
+</html>
