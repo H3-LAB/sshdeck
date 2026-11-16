@@ -54,12 +54,27 @@
   .reqs { color:var(--faint); font-size:13px; margin-top:16px; }
 
   /* app mock */
-  .shot { margin:48px auto 0; max-width:1120px; border-radius:14px; border:1px solid var(--line2); background:#0d0f14; overflow:hidden;
-    box-shadow:0 40px 120px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02); text-align:left; }
-  .titlebar { display:flex; align-items:center; gap:10px; height:36px; padding:0 12px; background:#171a21; border-bottom:1px solid var(--line); font-size:12.5px; color:var(--dim); }
-  .titlebar img { width:16px; height:16px; }
-  .titlebar .wc { margin-left:auto; display:flex; gap:18px; color:var(--faint); font-size:12px; }
-  .app { display:grid; grid-template-columns:220px 1fr 300px; height:460px; }
+  /* a Windows 11 window: 8px corners, 1px border, dark caption with the system caption buttons */
+  .shot { margin:48px auto 0; max-width:1120px; border-radius:8px; border:1px solid #3a3a3a; background:#0d0f14; overflow:hidden;
+    box-shadow:0 32px 64px rgba(0,0,0,.56), 0 2px 21px rgba(0,0,0,.55); text-align:left;
+    font-family:"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif; }
+  .titlebar { display:flex; align-items:center; height:32px; padding-left:12px; background:#202020; font-size:12px; color:#ffffff; }
+  .titlebar img { width:16px; height:16px; margin-right:12px; }
+  .titlebar .wc { margin-left:auto; display:flex; height:100%; }
+  .titlebar .wc span { width:46px; height:100%; display:grid; place-items:center; transition:background .1s; }
+  .titlebar .wc span:hover { background:rgba(255,255,255,.08); }
+  .titlebar .wc span.x:hover { background:#c42b1c; }
+  .titlebar .wc svg { width:10px; height:10px; stroke:#fff; stroke-width:1; fill:none; shape-rendering:crispEdges; }
+  .app { display:grid; grid-template-columns:220px 1fr 300px; height:500px; }
+  .tabs { overflow:hidden; align-items:flex-end; }
+  .tab { white-space:nowrap; flex-shrink:0; }
+  .tabtools { flex-shrink:0; }
+  .tabtools { margin-left:auto; display:flex; align-items:center; gap:2px; padding:0 4px 4px; color:var(--dim); }
+  .tabtools span { width:26px; height:24px; display:grid; place-items:center; border-radius:5px; font-size:13px; }
+  .tabtools span.on { color:var(--pink); }
+  .tabtools svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .home { display:grid; place-items:center; width:28px; color:var(--dim); padding-bottom:4px; }
+  .home svg { width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linejoin:round; }
   .side { background:#13151b; border-right:1px solid var(--line); padding:10px; font-size:12.5px; overflow:hidden; }
   .search { border:1px solid var(--line2); background:#1a1d25; border-radius:6px; padding:5px 9px; color:var(--faint); margin-bottom:10px; }
   .grp { display:flex; align-items:center; gap:7px; color:var(--dim); font-weight:600; margin:10px 0 4px; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; }
@@ -72,10 +87,11 @@
   .tabs { display:flex; gap:4px; padding:6px 8px 0; background:#14161d; border-bottom:1px solid var(--line); }
   .tab { display:flex; align-items:center; gap:6px; padding:6px 10px; border-radius:6px 6px 0 0; font-size:12px; color:var(--dim); border-top:2px solid transparent; }
   .tab.on { background:#0d0f14; color:#e6e8ec; border-top-color:var(--red); }
-  .bd { font-size:9px; font-weight:800; color:#fff; padding:1px 4px; border-radius:3px; letter-spacing:.02em; }
-  .panes { flex:1; display:grid; grid-template-columns:1fr 1fr; min-height:0; }
-  .pane { padding:10px 12px; font:12px/1.55 var(--mono); color:#d4d7dd; overflow:hidden; white-space:pre; }
-  .pane + .pane { border-left:1px solid var(--line); }
+  .bd { font:700 9.5px/1.25 "Segoe UI",Arial,sans-serif; color:#fff; padding:1px 4px; border-radius:3px; letter-spacing:.03em; }
+  /* split down: one pane above the other, so terminal lines are never cut */
+  .panes { flex:1; display:grid; grid-template-rows:1fr 1fr; min-height:0; }
+  .pane { padding:8px 12px; font:12px/1.5 var(--mono); color:#d4d7dd; overflow:hidden; white-space:pre; }
+  .pane + .pane { border-top:1px solid var(--line); }
   .pane.prod { background:linear-gradient(#1a0f12, #12090b); }
   .ph { font:11px/1 "Segoe UI",system-ui; color:var(--faint); margin-bottom:8px; display:flex; gap:6px; align-items:center; }
   .r{color:#ff7b72} .g{color:#7ee787} .y{color:#e3b341} .b{color:#79c0ff} .m{color:#d2a8ff} .f{color:#6e7681} .p{color:#f778ba}
@@ -152,7 +168,13 @@
     <div class="reqs" data-i="reqs">Windows 10 (1809) or Windows 11 · x64</div>
 
     <div class="shot" aria-hidden="true">
-      <div class="titlebar"><img src="assets/logo.png" alt=""><span>[SSH] web01.prod — SSH Deck</span><span class="wc">─ ☐ ✕</span></div>
+      <div class="titlebar"><img src="assets/logo.png" alt=""><span>[SSH] web01.prod — SSH Deck</span>
+        <span class="wc">
+          <span><svg viewBox="0 0 10 10"><path d="M0 5.5h10"/></svg></span>
+          <span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9" rx="1"/></svg></span>
+          <span class="x"><svg viewBox="0 0 10 10"><path d="M.5 .5l9 9M9.5 .5l-9 9"/></svg></span>
+        </span>
+      </div>
       <div class="app">
         <aside class="side">
           <div class="search" data-i="mSearch">Search hosts…</div>
@@ -171,9 +193,18 @@
         </aside>
         <div class="center">
           <div class="tabs">
+            <span class="home"><svg viewBox="0 0 16 16"><path d="M2 7.5L8 2.5l6 5V14H10v-4H6v4H2z"/></svg></span>
             <div class="tab on"><span class="bd" style="background:#388bfd">SSH</span>web01.prod +1</div>
             <div class="tab"><span class="bd" style="background:#2ea043">CYG</span>SSH Deck (Cygwin)</div>
             <div class="tab"><span class="bd" style="background:#e95420">WSL</span>Ubuntu</div>
+            <div class="tabtools">
+              <span><svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg></span>
+              <span><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="1.5"/><path d="M8 2.5v11"/></svg></span>
+              <span><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="1.5"/><path d="M2 8h12"/></svg></span>
+              <span><svg viewBox="0 0 16 16"><path d="M2 5a1.5 1.5 0 011.5-1.5H6l1.5 1.5h5A1.5 1.5 0 0114 6.5v5A1.5 1.5 0 0112.5 13h-9A1.5 1.5 0 012 11.5z"/></svg></span>
+              <span><svg viewBox="0 0 16 16"><path d="M2 11l3-4 3 2 3-5 3 3"/></svg></span>
+              <span class="on">✦</span>
+            </div>
           </div>
           <div class="panes">
 <div class="pane prod"><div class="ph"><span class="bd" style="background:var(--red)">PROD</span>web01.prod</div><span class="y">admin@web01:~$</span> sudo systemctl start nginx
