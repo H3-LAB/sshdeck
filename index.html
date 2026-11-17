@@ -53,6 +53,16 @@
   .store-badge img { height:52px; display:block; }
   .reqs { color:var(--faint); font-size:13px; margin-top:16px; }
 
+  /* real screenshots */
+  .shot img { display:block; width:100%; height:auto; }
+  .shot.gal { margin-top:22px; }
+  .shot figcaption { padding:10px 14px; font-size:14px; color:var(--dim); border-top:1px solid #2a2a2a; background:#141414; text-align:center; }
+  .thumbs { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:10px; max-width:1120px; margin:14px auto 0; }
+  .thumbs button { padding:0; border:2px solid transparent; border-radius:7px; overflow:hidden; background:none; cursor:pointer; opacity:.62; transition:opacity .15s, border-color .15s, transform .15s; }
+  .thumbs button:hover { opacity:.9; transform:translateY(-2px); }
+  .thumbs button.on { opacity:1; border-color:var(--violet); }
+  .thumbs img { display:block; width:100%; height:auto; }
+  @media (max-width:720px) { .thumbs { grid-template-columns:repeat(3, minmax(0,1fr)); } }
   /* app mock */
   /* a Windows 11 window: 8px corners, 1px border, dark caption with the system caption buttons */
   .shot { margin:48px auto 0; max-width:1120px; border-radius:8px; border:1px solid #3a3a3a; background:#0d0f14; overflow:hidden;
@@ -197,72 +207,14 @@
     <div class="cta"><span class="store-slot"></span><a class="btn" href="#features" data-i="more">See what it does</a></div>
     <div class="reqs" data-i="reqs">Windows 10 (1809) or Windows 11 · x64</div>
 
-    <div class="shot" aria-hidden="true">
-      <div class="titlebar"><img src="assets/logo.png" alt=""><span>[SSH] web01.prod — SSH Deck</span>
-        <span class="wc">
-          <span><svg viewBox="0 0 10 10"><path d="M0 5.5h10"/></svg></span>
-          <span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9" rx="1"/></svg></span>
-          <span class="x"><svg viewBox="0 0 10 10"><path d="M.5 .5l9 9M9.5 .5l-9 9"/></svg></span>
-        </span>
-      </div>
-      <div class="app">
-        <aside class="side">
-          <div class="search" data-i="mSearch">Search hosts…</div>
-          <div class="grp"><b style="background:var(--red)"></b>prod-web</div>
-          <div class="host on"><span class="s"></span>web01.prod<small>SSH</small></div>
-          <div class="host"><span class="s"></span>web02.prod<small>SSH</small></div>
-          <div class="host"><span class="s" style="background:var(--faint)"></span>lb01.prod</div>
-          <div class="grp"><b style="background:var(--amber)"></b>staging</div>
-          <div class="host"><span class="s"></span>app01.stg</div>
-          <div class="host"><span class="s" style="background:var(--faint)"></span>db01.stg</div>
-          <div class="grp"><b style="background:var(--green)"></b>dev</div>
-          <div class="host"><span class="s" style="background:var(--faint)"></span>dev-box</div>
-          <div class="grp"><b style="background:var(--blue)"></b><span data-i="mLocal">Local</span></div>
-          <div class="host"><span class="bd" style="background:#2ea043">CYG</span>SSH Deck (Cygwin)</div>
-          <div class="host"><span class="bd" style="background:#2d7dd2">PS7</span>PowerShell 7</div>
-        </aside>
-        <div class="center">
-          <div class="tabs">
-            <span class="home"><svg viewBox="0 0 16 16"><path d="M2 7.5L8 2.5l6 5V14H10v-4H6v4H2z"/></svg></span>
-            <div class="tab on"><span class="bd" style="background:#388bfd">SSH</span>web01.prod +1</div>
-            <div class="tab"><span class="bd" style="background:#2ea043">CYG</span>SSH Deck (Cygwin)</div>
-            <div class="tab"><span class="bd" style="background:#e95420">WSL</span>Ubuntu</div>
-            <div class="tabtools">
-              <span><svg viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></svg></span>
-              <span><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="1.5"/><path d="M8 2.5v11"/></svg></span>
-              <span><svg viewBox="0 0 16 16"><rect x="2" y="2.5" width="12" height="11" rx="1.5"/><path d="M2 8h12"/></svg></span>
-              <span><svg viewBox="0 0 16 16"><path d="M2 5a1.5 1.5 0 011.5-1.5H6l1.5 1.5h5A1.5 1.5 0 0114 6.5v5A1.5 1.5 0 0112.5 13h-9A1.5 1.5 0 012 11.5z"/></svg></span>
-              <span><svg viewBox="0 0 16 16"><path d="M2 11l3-4 3 2 3-5 3 3"/></svg></span>
-              <span class="on">✦</span>
-            </div>
-          </div>
-          <div class="panes">
-<div class="pane prod"><div class="ph"><span class="bd" style="background:var(--red)">PROD</span>web01.prod</div><span class="y">admin@web01:~$</span> sudo systemctl start nginx
-<span class="r">Job for nginx.service failed because the</span>
-<span class="r">control process exited with error code.</span>
-<span class="y">admin@web01:~$</span> sudo nginx -t
-nginx: [emerg] bind() to 0.0.0.0:80 failed
-  <span class="r">(98: Address already in use)</span>
-nginx: configuration file test <span class="r">failed</span>
-<span class="y">admin@web01:~$</span> <span class="f">▌</span></div>
-<div class="pane"><div class="ph"><span class="bd" style="background:var(--red)">PROD</span>web02.prod</div><span class="y">admin@web02:~$</span> uptime
- 10:42  up 41 days,  load: <span class="g">0.21 0.18 0.15</span>
-<span class="y">admin@web02:~$</span> df -h /
-Filesystem  Size  Used Avail Use%
-/dev/sda1    80G   31G   46G  <span class="g">41%</span>
-<span class="y">admin@web02:~$</span> <span class="f">▌</span></div>
-          </div>
-        </div>
-        <div class="ai">
-          <h4><span style="color:var(--pink)">✦</span> <span data-i="mAi">Assistant</span></h4>
-          <div class="ctx"><b style="width:7px;height:7px;border-radius:50%;background:var(--red);display:inline-block"></b>web01.prod · SSH · PROD</div>
-          <div class="bubble" data-i="mQ">Why won't nginx start?</div>
-          <div class="ans" data-i="mA">Port 80 is already taken by another process. Find out which one before changing anything:</div>
-          <div><div class="code">sudo ss -ltnp 'sport = :80'</div><div class="acts"><span data-i="mIns">Insert</span><span data-i="mRun">Run</span><span data-i="mCopy">Copy</span></div></div>
-          <div class="dots"><i></i><i></i><i></i></div>
-        </div>
-      </div>
-    </div>
+    <figure class="shot"><img id="heroShot" src="assets/shots/en/01-hero.jpg" width="1920" height="1080" alt="SSH Deck"></figure>
+  </section>
+
+  <section class="block" id="screens">
+    <h2 data-i="scrT">See it in action</h2>
+    <p class="sub" data-i="scrS">Real screenshots of SSH Deck (demo data).</p>
+    <figure class="shot gal"><img id="galShot" src="assets/shots/en/01-hero.jpg" width="1920" height="1080" alt=""><figcaption id="galCap"></figcaption></figure>
+    <div class="thumbs" id="thumbs"></div>
   </section>
 
   <section class="block" id="features">
@@ -321,7 +273,7 @@ Filesystem  Size  Used Avail Use%
 const STORE_ID = "";
 
 const T = {
- en:{navF:"Features",navH:"How it works",navQ:"FAQ",navP:"Privacy",pill1:"No telemetry",pill2:"No admin rights",pill3:"7 languages",
+ en:{scrT:"See it in action",scrS:"Real screenshots of SSH Deck (demo data).",c1:"Your servers organised from your ssh config: split panes, live CPU, network, disk I/O and Docker of the host",c2:"An AI assistant that sees the terminal and suggests commands you insert or run with one click",c3:"SFTP file manager per host: drag & drop, download, edit remote files with upload on save",c4:"Kubernetes: every cluster and context, pods, deployments, logs and shells in tabs",c5:"Docker on this PC: containers with live stats, images, volumes, networks and cleanup",c6:"Every action and shortcut one search away (Ctrl+Shift+Space)",navF:"Features",navH:"How it works",navQ:"FAQ",navP:"Privacy",pill1:"No telemetry",pill2:"No admin rights",pill3:"7 languages",
   h1a:"Your servers,",h1b:"organised.",lead:"SSH, SFTP, tunnels and an AI assistant in one place — with tabs, split panes and broadcast, grouped by your own ssh config.",
   more:"See what it does",reqs:"Windows 10 (1809) or Windows 11 · x64",soon:"Coming soon to the Microsoft Store",
   mSearch:"Search hosts…",mLocal:"Local",mAi:"Assistant",mQ:"Why won't nginx start?",mA:"Port 80 is already taken by another process. Find out which one before changing anything:",mIns:"Insert",mRun:"Run",mCopy:"Copy",
@@ -344,7 +296,7 @@ const T = {
   q3:"Does the AI see my servers?",a3:"Only when you ask it something, and only the latest terminal lines, with secrets masked. With a local model nothing leaves your PC.",
   q4:"Which AI providers work?",a4:"Ollama and LM Studio (local), Anthropic Claude and any OpenAI-compatible API with your own key.",
   cT:"Bring order to your servers",cD:"For Windows 10 and Windows 11."},
- pt:{navF:"Funcionalidades",navH:"Como funciona",navQ:"Perguntas",navP:"Privacidade",pill1:"Sem telemetria",pill2:"Sem direitos de admin",pill3:"7 línguas",
+ pt:{scrT:"Vê-o em ação",scrS:"Capturas reais do SSH Deck (dados de demonstração).",c1:"Os teus servidores organizados a partir do ssh config: painéis divididos, CPU, rede, I/O de disco e Docker do host em direto",c2:"Um assistente de IA que vê o terminal e sugere comandos que inseres ou executas com um clique",c3:"Gestor de ficheiros SFTP por host: arrastar e largar, descarregar, editar ficheiros remotos com envio ao gravar",c4:"Kubernetes: todos os clusters e contextos, pods, deployments, logs e shells em separadores",c5:"Docker deste PC: containers com estatísticas em direto, imagens, volumes, redes e limpeza",c6:"Todas as ações e atalhos à distância de uma pesquisa (Ctrl+Shift+Espaço)",navF:"Funcionalidades",navH:"Como funciona",navQ:"Perguntas",navP:"Privacidade",pill1:"Sem telemetria",pill2:"Sem direitos de admin",pill3:"7 línguas",
   h1a:"Os teus servidores,",h1b:"organizados.",lead:"SSH, SFTP, túneis e um assistente de IA num só sítio — com separadores, painéis divididos e broadcast, agrupados pelo teu próprio ssh config.",
   more:"Ver o que faz",reqs:"Windows 10 (1809) ou Windows 11 · x64",soon:"Brevemente na Microsoft Store",
   mSearch:"Procurar hosts…",mLocal:"Local",mAi:"Assistente",mQ:"Porque é que o nginx não arranca?",mA:"A porta 80 já está ocupada por outro processo. Vê qual é antes de mudar alguma coisa:",mIns:"Inserir",mRun:"Executar",mCopy:"Copiar",
@@ -367,7 +319,7 @@ const T = {
   q3:"A IA vê os meus servidores?",a3:"Só quando lhe perguntas algo, e só as últimas linhas do terminal, com segredos ocultados. Com um modelo local nada sai do teu PC.",
   q4:"Que fornecedores de IA funcionam?",a4:"Ollama e LM Studio (locais), Anthropic Claude e qualquer API compatível com OpenAI com a tua chave.",
   cT:"Põe ordem nos teus servidores",cD:"Para Windows 10 e Windows 11."},
- "pt-BR":{navF:"Recursos",navH:"Como funciona",navQ:"Perguntas",navP:"Privacidade",pill1:"Sem telemetria",pill2:"Sem direitos de admin",pill3:"7 idiomas",
+ "pt-BR":{scrT:"Veja em ação",scrS:"Capturas reais do SSH Deck (dados de demonstração).",c1:"Seus servidores organizados a partir do ssh config: painéis divididos, CPU, rede, I/O de disco e Docker do host ao vivo",c2:"Um assistente de IA que vê o terminal e sugere comandos que você insere ou executa com um clique",c3:"Gerenciador de arquivos SFTP por host: arrastar e soltar, baixar, editar arquivos remotos com envio ao salvar",c4:"Kubernetes: todos os clusters e contextos, pods, deployments, logs e shells em abas",c5:"Docker deste PC: containers com estatísticas ao vivo, imagens, volumes, redes e limpeza",c6:"Todas as ações e atalhos a uma pesquisa de distância (Ctrl+Shift+Espaço)",navF:"Recursos",navH:"Como funciona",navQ:"Perguntas",navP:"Privacidade",pill1:"Sem telemetria",pill2:"Sem direitos de admin",pill3:"7 idiomas",
   h1a:"Seus servidores,",h1b:"organizados.",lead:"SSH, SFTP, túneis e um assistente de IA em um só lugar — com abas, painéis divididos e broadcast, agrupados pelo seu próprio ssh config.",
   more:"Ver o que faz",reqs:"Windows 10 (1809) ou Windows 11 · x64",soon:"Em breve na Microsoft Store",
   mSearch:"Pesquisar hosts…",mLocal:"Local",mAi:"Assistente",mQ:"Por que o nginx não inicia?",mA:"A porta 80 já está ocupada por outro processo. Veja qual é antes de mudar algo:",mIns:"Inserir",mRun:"Executar",mCopy:"Copiar",
@@ -390,7 +342,7 @@ const T = {
   q3:"A IA vê meus servidores?",a3:"Só quando você pergunta algo, e só as últimas linhas do terminal, com segredos ocultados. Com um modelo local nada sai do seu PC.",
   q4:"Quais provedores de IA funcionam?",a4:"Ollama e LM Studio (locais), Anthropic Claude e qualquer API compatível com OpenAI com sua chave.",
   cT:"Coloque ordem nos seus servidores",cD:"Para Windows 10 e Windows 11."},
- es:{navF:"Funciones",navH:"Cómo funciona",navQ:"Preguntas",navP:"Privacidad",pill1:"Sin telemetría",pill2:"Sin permisos de admin",pill3:"7 idiomas",
+ es:{scrT:"Míralo en acción",scrS:"Capturas reales de SSH Deck (datos de demostración).",c1:"Tus servidores organizados desde tu ssh config: paneles divididos, CPU, red, E/S de disco y Docker del host en vivo",c2:"Un asistente de IA que ve el terminal y sugiere comandos que insertas o ejecutas con un clic",c3:"Gestor de archivos SFTP por host: arrastrar y soltar, descargar, editar archivos remotos con subida al guardar",c4:"Kubernetes: todos los clústeres y contextos, pods, deployments, logs y shells en pestañas",c5:"Docker de este PC: contenedores con estadísticas en vivo, imágenes, volúmenes, redes y limpieza",c6:"Todas las acciones y atajos a una búsqueda (Ctrl+Shift+Espacio)",navF:"Funciones",navH:"Cómo funciona",navQ:"Preguntas",navP:"Privacidad",pill1:"Sin telemetría",pill2:"Sin permisos de admin",pill3:"7 idiomas",
   h1a:"Tus servidores,",h1b:"organizados.",lead:"SSH, SFTP, túneles y un asistente de IA en un solo lugar — con pestañas, paneles divididos y broadcast, agrupados según tu propio ssh config.",
   more:"Ver qué hace",reqs:"Windows 10 (1809) o Windows 11 · x64",soon:"Próximamente en Microsoft Store",
   mSearch:"Buscar hosts…",mLocal:"Local",mAi:"Asistente",mQ:"¿Por qué no arranca nginx?",mA:"El puerto 80 ya lo usa otro proceso. Averigua cuál antes de cambiar nada:",mIns:"Insertar",mRun:"Ejecutar",mCopy:"Copiar",
@@ -413,7 +365,7 @@ const T = {
   q3:"¿La IA ve mis servidores?",a3:"Solo cuando le preguntas algo, y solo las últimas líneas del terminal, con los secretos ocultos. Con un modelo local nada sale de tu PC.",
   q4:"¿Qué proveedores de IA funcionan?",a4:"Ollama y LM Studio (locales), Anthropic Claude y cualquier API compatible con OpenAI con tu clave.",
   cT:"Pon orden en tus servidores",cD:"Para Windows 10 y Windows 11."},
- fr:{navF:"Fonctionnalités",navH:"Comment ça marche",navQ:"Questions",navP:"Confidentialité",pill1:"Sans télémétrie",pill2:"Sans droits admin",pill3:"7 langues",
+ fr:{scrT:"Voyez-le en action",scrS:"Captures réelles de SSH Deck (données de démonstration).",c1:"Vos serveurs organisés depuis votre ssh config : panneaux divisés, CPU, réseau, E/S disque et Docker de l'hôte en direct",c2:"Un assistant IA qui voit le terminal et propose des commandes à insérer ou exécuter en un clic",c3:"Gestionnaire de fichiers SFTP par hôte : glisser-déposer, téléchargement, édition à distance avec envoi à l'enregistrement",c4:"Kubernetes : tous les clusters et contextes, pods, deployments, logs et shells en onglets",c5:"Docker de ce PC : conteneurs avec statistiques en direct, images, volumes, réseaux et nettoyage",c6:"Toutes les actions et raccourcis à portée de recherche (Ctrl+Maj+Espace)",navF:"Fonctionnalités",navH:"Comment ça marche",navQ:"Questions",navP:"Confidentialité",pill1:"Sans télémétrie",pill2:"Sans droits admin",pill3:"7 langues",
   h1a:"Vos serveurs,",h1b:"organisés.",lead:"SSH, SFTP, tunnels et un assistant IA au même endroit — avec onglets, panneaux divisés et broadcast, regroupés selon votre propre ssh config.",
   more:"Voir ce qu'il fait",reqs:"Windows 10 (1809) ou Windows 11 · x64",soon:"Bientôt sur le Microsoft Store",
   mSearch:"Rechercher des hôtes…",mLocal:"Local",mAi:"Assistant",mQ:"Pourquoi nginx ne démarre pas ?",mA:"Le port 80 est déjà pris par un autre processus. Identifiez-le avant de modifier quoi que ce soit :",mIns:"Insérer",mRun:"Exécuter",mCopy:"Copier",
@@ -436,7 +388,7 @@ const T = {
   q3:"L'IA voit-elle mes serveurs ?",a3:"Seulement quand vous lui posez une question, et seulement les dernières lignes du terminal, secrets masqués. Avec un modèle local, rien ne quitte votre PC.",
   q4:"Quels fournisseurs d'IA fonctionnent ?",a4:"Ollama et LM Studio (locaux), Anthropic Claude et toute API compatible OpenAI avec votre clé.",
   cT:"Mettez de l'ordre dans vos serveurs",cD:"Pour Windows 10 et Windows 11."},
- de:{navF:"Funktionen",navH:"So funktioniert's",navQ:"Fragen",navP:"Datenschutz",pill1:"Keine Telemetrie",pill2:"Keine Adminrechte",pill3:"7 Sprachen",
+ de:{scrT:"So sieht es aus",scrS:"Echte Screenshots von SSH Deck (Demodaten).",c1:"Deine Server aus deiner ssh config geordnet: geteilte Bereiche, CPU, Netzwerk, Datenträger-E/A und Docker des Hosts live",c2:"Ein KI-Assistent, der das Terminal sieht und Befehle vorschlägt, die du mit einem Klick einfügst oder ausführst",c3:"SFTP-Dateimanager pro Host: Drag & Drop, Download, entfernte Dateien bearbeiten mit Upload beim Speichern",c4:"Kubernetes: alle Cluster und Kontexte, Pods, Deployments, Logs und Shells in Tabs",c5:"Docker auf diesem PC: Container mit Live-Statistiken, Images, Volumes, Netzwerke und Aufräumen",c6:"Jede Aktion und jedes Tastenkürzel nur eine Suche entfernt (Strg+Umschalt+Leertaste)",navF:"Funktionen",navH:"So funktioniert's",navQ:"Fragen",navP:"Datenschutz",pill1:"Keine Telemetrie",pill2:"Keine Adminrechte",pill3:"7 Sprachen",
   h1a:"Deine Server,",h1b:"geordnet.",lead:"SSH, SFTP, Tunnel und ein KI-Assistent an einem Ort — mit Tabs, geteilten Bereichen und Broadcast, gruppiert nach deiner eigenen ssh config.",
   more:"Funktionen ansehen",reqs:"Windows 10 (1809) oder Windows 11 · x64",soon:"Bald im Microsoft Store",
   mSearch:"Hosts suchen…",mLocal:"Lokal",mAi:"Assistent",mQ:"Warum startet nginx nicht?",mA:"Port 80 ist schon von einem anderen Prozess belegt. Finde heraus, welcher, bevor du etwas änderst:",mIns:"Einfügen",mRun:"Ausführen",mCopy:"Kopieren",
@@ -459,7 +411,7 @@ const T = {
   q3:"Sieht die KI meine Server?",a3:"Nur wenn du sie etwas fragst, und nur die letzten Terminalzeilen, mit ausgeblendeten Geheimnissen. Mit einem lokalen Modell verlässt nichts deinen PC.",
   q4:"Welche KI-Anbieter funktionieren?",a4:"Ollama und LM Studio (lokal), Anthropic Claude und jede OpenAI-kompatible API mit deinem eigenen Schlüssel.",
   cT:"Bring Ordnung in deine Server",cD:"Für Windows 10 und Windows 11."},
- it:{navF:"Funzionalità",navH:"Come funziona",navQ:"Domande",navP:"Privacy",pill1:"Nessuna telemetria",pill2:"Nessun diritto admin",pill3:"7 lingue",
+ it:{scrT:"Guardalo in azione",scrS:"Schermate reali di SSH Deck (dati dimostrativi).",c1:"I tuoi server organizzati dal tuo ssh config: pannelli divisi, CPU, rete, I/O disco e Docker dell'host in tempo reale",c2:"Un assistente IA che vede il terminale e suggerisce comandi da inserire o eseguire con un clic",c3:"File manager SFTP per host: trascina e rilascia, scarica, modifica file remoti con caricamento al salvataggio",c4:"Kubernetes: tutti i cluster e contesti, pod, deployment, log e shell in schede",c5:"Docker di questo PC: container con statistiche in tempo reale, immagini, volumi, reti e pulizia",c6:"Ogni azione e scorciatoia a portata di ricerca (Ctrl+Maiusc+Spazio)",navF:"Funzionalità",navH:"Come funziona",navQ:"Domande",navP:"Privacy",pill1:"Nessuna telemetria",pill2:"Nessun diritto admin",pill3:"7 lingue",
   h1a:"I tuoi server,",h1b:"organizzati.",lead:"SSH, SFTP, tunnel e un assistente IA in un unico posto — con schede, pannelli divisi e broadcast, raggruppati secondo il tuo ssh config.",
   more:"Scopri cosa fa",reqs:"Windows 10 (1809) o Windows 11 · x64",soon:"Presto sul Microsoft Store",
   mSearch:"Cerca host…",mLocal:"Locale",mAi:"Assistente",mQ:"Perché nginx non parte?",mA:"La porta 80 è già occupata da un altro processo. Scopri quale prima di cambiare qualcosa:",mIns:"Inserisci",mRun:"Esegui",mCopy:"Copia",
@@ -495,11 +447,34 @@ function pick() {
   }
   return "en";
 }
+const SHOTS = ["01-hero", "02-ai", "03-sftp", "04-k8s", "05-docker", "06-palette"];
+let shotIdx = 1;
+function shots(lang) {
+  const t = T[lang], base = `assets/shots/${lang}/`;
+  document.getElementById("heroShot").src = base + SHOTS[0] + ".jpg";
+  const box = document.getElementById("thumbs");
+  box.innerHTML = "";
+  SHOTS.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.title = t["c" + (i + 1)];
+    b.innerHTML = `<img src="${base}${s}-thumb.jpg" alt="" loading="lazy">`;
+    b.onclick = () => { shotIdx = i; show(); };
+    box.appendChild(b);
+  });
+  function show() {
+    document.getElementById("galShot").src = base + SHOTS[shotIdx] + ".jpg";
+    document.getElementById("galShot").alt = t["c" + (shotIdx + 1)];
+    document.getElementById("galCap").textContent = t["c" + (shotIdx + 1)];
+    [...box.children].forEach((b, i) => b.classList.toggle("on", i === shotIdx));
+  }
+  show();
+}
 function apply(lang) {
   const t = T[lang];
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i]").forEach(el => { const k = el.dataset.i; if (t[k]) el.textContent = t[k]; });
   document.getElementById("lang").value = lang;
+  shots(lang);
   document.querySelectorAll(".store-slot").forEach(slot => {
     slot.innerHTML = STORE_ID
       ? `<a class="store-badge" href="https://apps.microsoft.com/detail/${STORE_ID}?mode=direct" target="_blank" rel="noopener"><img src="https://get.microsoft.com/images/${BADGE[lang]}%20dark.svg" alt="Microsoft Store"></a>`
